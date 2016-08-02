@@ -11,15 +11,14 @@
 
 # do not produce empty debuginfo package
 %global debug_package %{nil}
-%global rcver beta1
 
 Summary:       Package that installs PHP 7.1
 Name:          %scl_name
 Version:       7.1.0
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 1
-Release:       %{rcver}%{release_prefix}{?dist}.cpanel
+%define        release_prefix 1.beta1
+Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
 
@@ -143,5 +142,8 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Mon Aug 01 2016 Edwin Buck <e.buck@cpanel.net> - 7.1.0-beta1
+- new release for beta1.
+
 * Wed Jul 13 2016 <jacob.perkins@cpanel.net> - 7.1.0-alpha3
 - Initial packaging
