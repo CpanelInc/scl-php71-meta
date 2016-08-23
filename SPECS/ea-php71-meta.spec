@@ -17,7 +17,7 @@ Name:          %scl_name
 Version:       7.1.0
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 2.beta1
+%define        release_prefix 3.beta3
 Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
@@ -142,6 +142,9 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Fri Aug 19 2016 Jacob Perkins <jacob.perkins@cpanel.net> 7.1.0-3.beta3
+- Updated PHP version to 7.1.0-1.beta3
+
 * Mon Aug 08 2016 Edwin Buck <e.buck@cpanel.net> - 7.1.0-2.beta1
 - add installation dependency on ea-php71-pear
 
