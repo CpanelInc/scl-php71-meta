@@ -14,7 +14,7 @@
 
 Summary:       Package that installs PHP 7.1
 Name:          %scl_name
-Version:       7.1.11
+Version:       7.1.12
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
 %define        release_prefix 1
@@ -111,6 +111,14 @@ help2man -N --section 7 ./h2m_helper -o %{scl_name}.7
 install -D -m 644 enable %{buildroot}%{_scl_scripts}/enable
 install -D -m 644 scldev %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 install -D -m 644 %{scl_name}.7 %{buildroot}%{_mandir}/man7/%{scl_name}.7
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/etc
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/share/doc
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/include
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/share/man/man1
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/bin
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/var/cache
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/var/tmp
+mkdir -p %{buildroot}/opt/cpanel/ea-php71/root/usr/%{_lib}
 
 %scl_install
 
@@ -129,7 +137,18 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 %doc README LICENSE
 %scl_files
 %{_mandir}/man7/%{scl_name}.*
-
+%dir /opt/cpanel/ea-php71/root/etc
+%dir /opt/cpanel/ea-php71/root/usr
+%dir /opt/cpanel/ea-php71/root/usr/share
+%dir /opt/cpanel/ea-php71/root/usr/share/doc
+%dir /opt/cpanel/ea-php71/root/usr/include
+%dir /opt/cpanel/ea-php71/root/usr/share/man
+%dir /opt/cpanel/ea-php71/root/usr/share/man/man1
+%dir /opt/cpanel/ea-php71/root/usr/bin
+%dir /opt/cpanel/ea-php71/root/usr/var
+%dir /opt/cpanel/ea-php71/root/usr/var/cache
+%dir /opt/cpanel/ea-php71/root/usr/var/tmp
+%dir /opt/cpanel/ea-php71/root/usr/%{_lib}
 
 %files build
 %defattr(-,root,root)
@@ -142,6 +161,12 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Sun Nov 26 2017 Cory McIntire <cory@cpanel.net> - 7.1.12-1
+- Updated to version 7.1.12 via update_pkg.pl (ZC-3097)
+
+* Fri Nov 03 2017 Dan Muey <dan@cpanel.net> - 7.1.11-2
+- EA-3999: adjust files to get better cleanup on uninstall
+
 * Fri Oct 27 2017 Jacob Perkins <jacob.perkins@cpanel.net> - 7.1.11-1
 - EA-6935: Updated to version 7.1.11
 
