@@ -17,7 +17,7 @@ Name:          %scl_name
 Version:       7.1.14
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 1
+%define        release_prefix 2
 Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
@@ -65,6 +65,9 @@ to build %scl Software Collection.
 %package scldevel
 Summary:   Package shipping development files for %scl
 Group:     Development/Languages
+
+Provides:  ea-php-scldevel = %{version}
+Conflicts: ea-php-scldevel > %{version}, ea-php-scldevel < %{version}
 
 %description scldevel
 Package shipping development files, especially usefull for development of
@@ -175,6 +178,9 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Thu Feb 15 2018 Daniel Muey <dan@cpanel.net> - 7.1.14-2
+- EA-5277: Add conflicts for ea-php##-scldevel packages
+
 * Fri Feb 02 2018 Daniel Muey <dan@cpanel.net> - 7.1.14-1
 - Updated to version 7.1.14 via update_pkg.pl (EA-7204)
 
