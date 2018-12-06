@@ -14,7 +14,7 @@
 
 Summary:       Package that installs PHP 7.1
 Name:          %scl_name
-Version:       7.1.24
+Version:       7.1.25
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
 %define        release_prefix 1
@@ -178,6 +178,9 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Thu Dec 06 2018 Cory McIntire <cory@cpanel.net> - 7.1.25-1
+- Updated to version 7.1.25 via update_pkg.pl (EA-8048)
+
 * Thu Nov 08 2018 Cory McIntire <cory@cpanel.net> - 7.1.24-1
 - Updated to version 7.1.24 via update_pkg.pl (EA-8003)
 
