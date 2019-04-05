@@ -14,10 +14,10 @@
 
 Summary:       Package that installs PHP 7.1
 Name:          %scl_name
-Version:       7.1.27
+Version:       7.1.28
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 2
+%define        release_prefix 1
 Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
@@ -181,6 +181,9 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Thu Apr 04 2019 Cory McIntire <cory@cpanel.net> - 7.1.28-1
+- Updated to version 7.1.28 via update_pkg.pl (EA-8316)
+
 * Fri Mar 15 2019 Tim Mullin <tim@cpanel.net> - 7.1.27-2
 - EA-8291: Fix pear installing before php-cli when installing ea-php71
 
