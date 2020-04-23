@@ -17,7 +17,7 @@ Name:          %scl_name
 Version:       7.1.33
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 2
+%define        release_prefix 3
 Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
@@ -140,6 +140,11 @@ tmp_version=$(echo %{scl_name_version} | sed -re 's/([0-9])([0-9])/\1\.\2/')
 sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_version}/g" %{SOURCE0} \
   | tee -a %{buildroot}%{_root_sysconfdir}/rpm/macros.%{scl}-config
 
+# Remove empty share/[man|locale]/ directories
+find %{buildroot}/opt/cpanel/%{scl}/root/usr/share/man/ -type d -empty -delete
+find %{buildroot}/opt/cpanel/%{scl}/root/usr/share/locale/ -type d -empty -delete
+mkdir -p %{buildroot}/opt/cpanel/%{scl}/root/usr/share/locale
+
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
@@ -157,7 +162,6 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 %dir /opt/cpanel/ea-php71/root/usr/share/doc
 %dir /opt/cpanel/ea-php71/root/usr/include
 %dir /opt/cpanel/ea-php71/root/usr/share/man
-%dir /opt/cpanel/ea-php71/root/usr/share/man/man1
 %dir /opt/cpanel/ea-php71/root/usr/bin
 %dir /opt/cpanel/ea-php71/root/usr/var
 %dir /opt/cpanel/ea-php71/root/usr/var/cache
@@ -179,6 +183,9 @@ sed -e 's/@SCL@/%{scl_macro_base}%{scl_name_version}/g' -e "s/@VERSION@/${tmp_ve
 
 
 %changelog
+* Thu Apr 23 2020 Daniel Muey <dan@cpanel.net> - 7.1.33-3
+- ZC-6611: Do not package empty share directories
+
 * Fri Feb 07 2020 Tim Mullin <tim@cpanel.net> - 7.1.33-2
 - EA-8854: Fix circular dependencies in our PHP packages
 
