@@ -9,15 +9,12 @@
 %global scl              %{scl_name_base}%{scl_name_version}
 %scl_package %scl
 
-# do not produce empty debuginfo package
-%global debug_package %{nil}
-
 Summary:       Package that installs PHP 7.1
 Name:          %scl_name
 Version:       7.1.33
 Vendor:        cPanel, Inc.
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define        release_prefix 5
+%define        release_prefix 6
 Release:       %{release_prefix}%{?dist}.cpanel
 Group:         Development/Languages
 License:       GPLv2+
@@ -183,6 +180,9 @@ mkdir -p %{buildroot}/opt/cpanel/%{scl}/root/usr/share/locale
 
 
 %changelog
+* Wed May 10 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 7.1.33-6
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Tue Dec 28 2021 Dan Muey <dan@cpanel.net> - 7.1.33-5
 - ZC-9589: Update DISABLE_BUILD to match OBS
 
